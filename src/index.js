@@ -1,38 +1,19 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const cors = require('cors');
-const path = require('path');
+import express from "express";
+import cors from "cors";
+import "./connect.js";
 
-dotenv.config();
-
-const garmentsRouter = require('./routes/garments');
-const aiRouter = require('./routes/ai');
+import garmentsRoutes from "./routes/garments.js";
+import authRoutes from "./routes/auth.js";
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:5173' }));
-app.use(express.json({ limit: '10mb' }));
 
-const PORT = process.env.PORT || 3001;
-const MONGODB_URI = process.env.MONGODB_URI;
+app.use(cors());
+app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
-if (!MONGODB_URI) {
-  console.warn('MONGODB_URI is not set. Add it to .env');
-}
+app.use("/api/auth", authRoutes);
+app.use("/api/garments", garmentsRoutes);
 
-mongoose
-  .connect(MONGODB_URI || '')
-  .then(() => console.log('MongoDB connected'))
-  .catch((err) => console.error('MongoDB connection error:', err.message));
-
-app.get('/', (req, res) => {
-  res.json({ status: 'ok' });
-});
-
-app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
-app.use('/api/garments', garmentsRouter);
-app.use('/api/ai', aiRouter);
-
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.listen(5000, () => {
+  console.log("Server running on http://localhost:3000");
 });

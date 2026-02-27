@@ -1,16 +1,22 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const GarmentSchema = new mongoose.Schema(
   {
-    title: { type: String, trim: true },
-    category: { type: String, trim: true },
-    color: { type: String, trim: true },
+    title: String,
+    category: String,
+    color: String,
     imageUrl: { type: String, required: true },
-    originalUrl: { type: String, default: '' },
-    cutoutUrl: { type: String, default: '' },
-    cloudinaryId: { type: String, default: '' },
+    originalUrl: String,
+    cutoutUrl: String,
+    cloudinaryId: String,
+
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Garment', GarmentSchema);
+export default mongoose.model("Garment", GarmentSchema);
