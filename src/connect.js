@@ -1,10 +1,15 @@
+import "./loadEnv.js";
 import mongoose from "mongoose";
 
-console.log("Attempting to connect to MongoDB...");
+const mongoUrl =
+  process.env.MONGO_URL ||
+  process.env.MONGODB_URI ||
+  "mongodb://localhost:27017/projet-db";
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/projet-db");
+    console.log("Attempting to connect to MongoDB...");
+    await mongoose.connect(mongoUrl);
     console.log("✅ Connected to MongoDB successfully");
   } catch (error) {
     console.error("❌ Error connecting to MongoDB:", error.message);
@@ -13,5 +18,3 @@ const connectDB = async () => {
 };
 
 export default connectDB;
-
-connectDB();
