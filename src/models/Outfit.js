@@ -31,6 +31,7 @@ const OutfitSchema = new mongoose.Schema(
     lastWornAt: { type: Date, default: null },
     personalNote: { type: String, default: "", trim: true, maxlength: 500 },
     personalRating: { type: Number, default: null, min: 1, max: 5 },
+    isPublic: { type: Boolean, default: false },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

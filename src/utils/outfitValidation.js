@@ -41,17 +41,20 @@ const normalizePersonalNote = (value) => {
   return normalized.slice(0, 500);
 };
 
-const normalizePersonalRating = (value) => {
-  if (value == null || value === "") {
-    return null;
+const normalizeIsPublic = (value) => {
+  if (typeof value === "boolean") {
+    return value;
   }
 
-  const parsed = Number(value);
-  if (!Number.isInteger(parsed) || parsed < 1 || parsed > 5) {
-    return null;
+  if (value === "true") {
+    return true;
   }
 
-  return parsed;
+  if (value === "false") {
+    return false;
+  }
+
+  return false; // Par défaut privé
 };
 
 export const toOutfitItems = (incomingItems) =>
@@ -80,6 +83,9 @@ export const validateOutfitPayload = (body) => {
   const personalRating = hasOwn(body, "personalRating")
     ? normalizePersonalRating(body?.personalRating)
     : null;
+  const isPublic = hasOwn(body, "isPublic")
+    ? normalizeIsPublic(body?.isPublic)
+    : false;
 
   if (!name) {
     errors.push("Le nom de la tenue est requis.");
@@ -118,6 +124,7 @@ export const validateOutfitPayload = (body) => {
     isFavorite: favoriteValue ?? false,
     personalNote,
     personalRating,
+    isPublic,
     errors,
   };
 };
@@ -142,6 +149,11 @@ export const validateOutfitMetaPayload = (body) => {
     } else {
       updates.isFavorite = isFavorite;
     }
+  }
+
+  if (hasOwn(body, "isPublic")) {
+    const isPublic = normalizeIsPublic(body?.isPublic);
+    updates.isPublic = isPublic;
   }
 
   if (hasOwn(body, "personalNote")) {

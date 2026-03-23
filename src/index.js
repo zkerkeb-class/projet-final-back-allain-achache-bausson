@@ -7,6 +7,7 @@ import connectDB from "./connect.js";
 import garmentsRoutes from "./routes/garments.js";
 import authRoutes from "./routes/auth.js";
 import outfitsRoutes from "./routes/outfits.js";
+import publicPostsRoutes from "./routes/publicPosts.js";
 import calendarRoutes from "./routes/calendar.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 
@@ -20,6 +21,7 @@ export const createApp = () => {
   app.use("/api/auth", authRoutes);
   app.use("/api/garments", garmentsRoutes);
   app.use("/api/outfits", outfitsRoutes);
+  app.use("/api/public-posts", publicPostsRoutes);
   app.use("/api/calendar", calendarRoutes);
 
   app.use(notFoundHandler);

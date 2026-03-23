@@ -25,6 +25,15 @@ router.get("/", auth, async (req, res) => {
   res.json(outfits);
 });
 
+router.get("/public", async (req, res) => {
+  const outfits = await Outfit.find({ isPublic: true })
+    .populate("items.garment")
+    .populate("user", "email") // Pour afficher le nom de l'utilisateur
+    .sort({ createdAt: -1 });
+
+  res.json(outfits);
+});
+
 router.post("/", auth, async (req, res) => {
   const { name, items, status, isFavorite, personalNote, personalRating, errors } = validateOutfitPayload(
     req.body || {}
