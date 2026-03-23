@@ -94,15 +94,15 @@ export const validateOutfitPayload = (body) => {
   }
 
   if (!items.length) {
-    errors.push("Ajoute au moins un vetement a la tenue.");
+    errors.push("Ajoute au moins un vêtement ? la tenue.");
   }
 
   if (items.some((item) => !item.garment)) {
-    errors.push("Chaque piece doit referencer un vetement.");
+    errors.push("Chaque pièce doit référencer un vêtement.");
   }
 
   if (items.some((item) => !garmentCategories.includes(item.category))) {
-    errors.push("Une categorie de tenue est invalide.");
+    errors.push("Une catégorie de tenue est invalide.");
   }
 
   if (!status) {
@@ -114,7 +114,7 @@ export const validateOutfitPayload = (body) => {
   }
 
   if (hasOwn(body, "personalRating") && personalRating == null) {
-    errors.push("La note perso doit etre comprise entre 1 et 5.");
+    errors.push("La note perso doit être comprise entre 1 et 5.");
   }
 
   return {
@@ -166,7 +166,7 @@ export const validateOutfitMetaPayload = (body) => {
     } else {
       const personalRating = normalizePersonalRating(body?.personalRating);
       if (personalRating == null) {
-        errors.push("La note perso doit etre comprise entre 1 et 5.");
+        errors.push("La note perso doit être comprise entre 1 et 5.");
       } else {
         updates.personalRating = personalRating;
       }
@@ -174,7 +174,7 @@ export const validateOutfitMetaPayload = (body) => {
   }
 
   if (!Object.keys(updates).length) {
-    errors.push("Aucune mise a jour de tenue n'a ete fournie.");
+    errors.push("Aucune mise à jour de tenue n'a été fournie.");
   }
 
   return { updates, errors };

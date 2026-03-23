@@ -18,7 +18,7 @@ router.post("/register", async (req, res) => {
 
   const existing = await User.findOne({ email });
   if (existing) {
-    throw badRequest("Email deja utilise");
+    throw badRequest("Email déjà utilis?");
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
     password: hashedPassword,
   });
 
-  res.status(201).json({ message: "Utilisateur cree", userId: user._id });
+  res.status(201).json({ message: "Utilisateur cr??", userId: user._id });
 });
 
 router.post("/login", async (req, res) => {

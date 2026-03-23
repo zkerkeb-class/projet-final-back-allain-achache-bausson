@@ -16,7 +16,7 @@ export const validateCredentials = ({ email, password }) => {
   if (!safePassword) {
     errors.push("Mot de passe requis.");
   } else if (safePassword.length < 8) {
-    errors.push("Le mot de passe doit contenir au moins 8 caracteres.");
+    errors.push("Le mot de passe doit contenir au moins 8 caractères.");
   }
 
   return {

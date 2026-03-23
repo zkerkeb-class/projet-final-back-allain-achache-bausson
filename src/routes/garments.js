@@ -223,7 +223,7 @@ router.post("/:id/reprocess-cutout", auth, validateObjectId("id", "Garment"), as
     if (!sourcePath || !fs.existsSync(sourcePath)) {
       return res.status(400).json({
         error: "Original image unavailable",
-        details: "Impossible de relancer le detourage sans image source locale.",
+        details: "Impossible de relancer le détourage sans image source locale.",
       });
     }
 
@@ -235,7 +235,7 @@ router.post("/:id/reprocess-cutout", auth, validateObjectId("id", "Garment"), as
     if (!cutoutUrl) {
       return res.status(503).json({
         error: "Background removal failed",
-        details: cutoutError || "Le detourage a echoue.",
+        details: cutoutError || "Le détourage a échoué.",
       });
     }
 

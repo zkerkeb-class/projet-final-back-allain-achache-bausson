@@ -37,7 +37,7 @@ router.delete("/:id", auth, async (req, res) => {
   }
 
   if (String(post.user) !== String(req.user.id)) {
-    throw badRequest("Vous n'etes pas autorise a supprimer ce post.");
+    throw badRequest("Vous n'?tes pas autoris? ? supprimer ce post.");
   }
 
   await post.deleteOne();

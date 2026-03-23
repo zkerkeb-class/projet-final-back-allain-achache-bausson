@@ -7,11 +7,13 @@ const commands = [
     name: "ai",
     command: "npm",
     args: ["run", "ai"],
+    required: false,
   },
   {
     name: "api",
     command: "npm",
     args: ["run", "dev"],
+    required: true,
   },
 ];
 
@@ -47,8 +49,13 @@ for (const entry of commands) {
     }
 
     const reason = signal ? `signal ${signal}` : `code ${code ?? 0}`;
-    console.error(`[${entry.name}] stopped with ${reason}`);
-    stopAll(code ?? 0);
+    if (entry.required) {
+      console.error(`[${entry.name}] stopped with ${reason}`);
+      stopAll(code ?? 0);
+      return;
+    }
+
+    console.warn(`[${entry.name}] stopped with ${reason} (optional service, api stays running)`);
   });
 
   child.on("error", (error) => {
@@ -56,8 +63,13 @@ for (const entry of commands) {
       return;
     }
 
-    console.error(`[${entry.name}] failed to start: ${error.message}`);
-    stopAll(1);
+    if (entry.required) {
+      console.error(`[${entry.name}] failed to start: ${error.message}`);
+      stopAll(1);
+      return;
+    }
+
+    console.warn(`[${entry.name}] failed to start: ${error.message} (optional service, api stays running)`);
   });
 
   children.push(child);

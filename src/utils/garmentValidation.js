@@ -131,7 +131,7 @@ export const validateGarmentPayload = (body) => {
   const errors = [];
 
   if (!payload.category) {
-    errors.push("Categorie invalide.");
+    errors.push("Catégorie invalide.");
   }
 
   if (!payload.color) {
@@ -139,7 +139,7 @@ export const validateGarmentPayload = (body) => {
   }
 
   if (body.secondaryColor !== undefined && body.secondaryColor !== "" && !payload.secondaryColor) {
-    errors.push("Deuxieme couleur invalide.");
+    errors.push("Deuxième couleur invalide.");
   }
 
   if (body.price !== undefined && body.price !== "" && payload.price == null) {
@@ -147,7 +147,7 @@ export const validateGarmentPayload = (body) => {
   }
 
   if (payload.price != null && payload.price < 0) {
-    errors.push("Le prix doit etre positif.");
+    errors.push("Le prix doit être positif.");
   }
 
   if (body.purchaseDate && !payload.purchaseDate) {
@@ -183,7 +183,7 @@ export const validateGarmentPayload = (body) => {
   }
 
   if (body.laundryStatus !== undefined && !garmentLaundryStatuses.includes(payload.laundryStatus)) {
-    errors.push("Etat du vetement invalide.");
+    errors.push("état du vêtement invalide.");
   }
 
   if (body.condition !== undefined && !garmentConditions.includes(payload.condition)) {
