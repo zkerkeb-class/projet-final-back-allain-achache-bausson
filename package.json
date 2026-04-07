@@ -1,0 +1,40 @@
+{
+  "name": "projet-final-back-allain-achache-bausson",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "dev:all": "node scripts/dev-all.js",
+    "reset:password": "node scripts/reset-password.js",
+    "start": "node src/index.js",
+    "ai": "py -m uvicorn ai_service.app:app --host 127.0.0.1 --port 5001",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zkerkeb-class/projet-final-back-allain-achache-bausson.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zkerkeb-class/projet-final-back-allain-achache-bausson/issues"
+  },
+  "homepage": "https://github.com/zkerkeb-class/projet-final-back-allain-achache-bausson#readme",
+  "dependencies": {
+    "axios": "^1.13.5",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "form-data": "^4.0.5",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.2.1",
+    "multer": "^2.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
